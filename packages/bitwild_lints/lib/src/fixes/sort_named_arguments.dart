@@ -9,13 +9,13 @@ import '../rules/sort_named_arguments.dart';
 
 /// Reorders named arguments, leaving positional arguments where they are.
 class SortNamedArgumentsFix extends ResolvedCorrectionProducer {
-  SortNamedArgumentsFix({required super.context});
-
   static const _kind = FixKind(
-    'btwld.fix.sortNamedArguments',
+    'bitwild.fix.sortNamedArguments',
     DartFixKindPriority.standard,
     'Sort named arguments',
   );
+
+  SortNamedArgumentsFix({required super.context});
 
   @override
   CorrectionApplicability get applicability =>

@@ -2,7 +2,7 @@
 // ignore_for_file: non_constant_identifier_names
 
 import 'package:analyzer_testing/analysis_rule/analysis_rule.dart';
-import 'package:btwld_rules/src/rules/avoid_barrel_imports_in_src.dart';
+import 'package:bitwild_lints/src/rules/avoid_barrel_imports_in_src.dart';
 import 'package:test_reflective_loader/test_reflective_loader.dart';
 
 void main() {
@@ -13,6 +13,8 @@ void main() {
 
 @reflectiveTest
 class AvoidBarrelImportsInSrcTest extends AnalysisRuleTest {
+  String get srcFile => '$testPackageLibPath/src/user.dart';
+
   @override
   void setUp() {
     rule = AvoidBarrelImportsInSrc();
@@ -21,8 +23,6 @@ class AvoidBarrelImportsInSrcTest extends AnalysisRuleTest {
       ..addFile('lib/src/thing.dart', 'class Thing {}');
     super.setUp();
   }
-
-  String get srcFile => '$testPackageLibPath/src/user.dart';
 
   void writeLibrary() {
     newFile('$testPackageLibPath/src/value.dart', 'class Value {}');

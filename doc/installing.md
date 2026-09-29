@@ -1,6 +1,6 @@
-# Installing in a btwld project
+# Installing in a Bitwild project
 
-This guide sets up the shared presets and the `btwld_rules` plugin in one of
+This guide sets up the shared presets and the `bitwild_lints` plugin in one of
 our Dart or Flutter repositories. It takes about ten minutes per repository,
 plus the time to fix whatever new diagnostics appear.
 
@@ -27,11 +27,11 @@ In the package's `pubspec.yaml` (in a pub workspace, the root `pubspec.yaml`):
 
 ```yaml
 dev_dependencies:
-  btwld_lints:
+  bitwild_analysis:
     git:
       url: https://github.com/btwld/lints.git
-      path: packages/btwld_lints
-      ref: v0.2.0
+      path: packages/bitwild_analysis
+      ref: v0.3.0
 ```
 
 The presets depend only on `lints` and `flutter_lints`, so they don't
@@ -46,16 +46,16 @@ Flutter app or package:
 
 ```yaml
 include:
-  - package:btwld_lints/flutter.yaml
-  - package:btwld_lints/plugin.yaml
+  - package:bitwild_analysis/flutter.yaml
+  - package:bitwild_analysis/plugin.yaml
 ```
 
 Pure Dart package:
 
 ```yaml
 include:
-  - package:btwld_lints/dart.yaml
-  - package:btwld_lints/plugin.yaml
+  - package:bitwild_analysis/dart.yaml
+  - package:bitwild_analysis/plugin.yaml
 ```
 
 `plugin.yaml` turns on the recommended plugin rules: the bug checks and the
@@ -71,8 +71,8 @@ locally, add it by path to a checkout of this repository:
 
 ```yaml
 plugins:
-  btwld_rules:
-    path: /absolute/path/to/lints/packages/btwld_rules
+  bitwild_lints:
+    path: /absolute/path/to/lints/packages/bitwild_lints
 ```
 
 Keep that path out of shared branches: it only works on your machine.
@@ -84,8 +84,8 @@ Configure the workspace once, at the root, and have every member include it:
 ```yaml
 # analysis_options.yaml at the workspace root
 include:
-  - package:btwld_lints/flutter.yaml
-  - package:btwld_lints/plugin.yaml
+  - package:bitwild_analysis/flutter.yaml
+  - package:bitwild_analysis/plugin.yaml
 ```
 
 ```yaml
@@ -93,7 +93,7 @@ include:
 include: ../../analysis_options.yaml
 ```
 
-Add `btwld_lints` to the root `pubspec.yaml`'s dev dependencies so the root
+Add `bitwild_analysis` to the root `pubspec.yaml`'s dev dependencies so the root
 options file resolves. Member options files can add their own rules and
 excludes below the `include`.
 
@@ -110,8 +110,8 @@ Two things don't work in a workspace:
 
 Delete rules from your `linter: rules:` list that the presets already enable,
 and delete the `strict-casts`, `strict-inference`, and `strict-raw-types`
-settings. See [`dart.yaml`](../packages/btwld_lints/lib/dart.yaml) and
-[`flutter.yaml`](../packages/btwld_lints/lib/flutter.yaml) for the list.
+settings. See [`dart.yaml`](../packages/bitwild_analysis/lib/dart.yaml) and
+[`flutter.yaml`](../packages/bitwild_analysis/lib/flutter.yaml) for the list.
 
 Keep everything project-specific: `analyzer: exclude:` globs for generated
 code (add them if you don't have them; lint rules, including the plugin's,
@@ -142,7 +142,7 @@ Two quick fixes are available in the IDE: **Add a blank line before
 ## 6. Adopt in steps
 
 On an existing codebase, count first and fix second. As a reference, on five
-large btwld repositories that had never enforced them, each of the ordering
+large Bitwild repositories that had never enforced them, each of the ordering
 and formatting rules in `plugin_all.yaml` reported between 80 and 4,700
 issues; each recommended rule reported 50 at most, and
 `unconditional_recursion` reported only a real bug.
@@ -176,11 +176,11 @@ A plugin rule, by repeating the plugin's source with a `diagnostics` entry
 
 ```yaml
 plugins:
-  btwld_rules:
+  bitwild_lints:
     git:
       url: https://github.com/btwld/lints.git
-      path: packages/btwld_rules
-      ref: v0.2.0
+      path: packages/bitwild_lints
+      ref: v0.3.0
     diagnostics:
       sort_class_members: false
 ```
@@ -188,14 +188,21 @@ plugins:
 The same `diagnostics` map changes a rule's severity instead: set it to
 `info`, `warning`, or `error`.
 
+## Configuring rules
+
+Rules with options read them from a top-level `bitwild_lints:` section of
+`analysis_options.yaml` (in a workspace, the root file). Today that is the
+member order of `sort_class_members`; see
+[its documentation](../packages/bitwild_lints/README.md#configuring-the-order).
+
 One occurrence, with a comment that says why:
 
 ```dart
-// ignore: btwld_rules/prefer_named_boolean_parameters
+// ignore: bitwild_lints/prefer_named_boolean_parameters
 void setVisible(bool visible, bool animated) {}
 ```
 
-Or a whole file: `// ignore_for_file: btwld_rules/sort_class_members`.
+Or a whole file: `// ignore_for_file: bitwild_lints/sort_class_members`.
 
 ## CI
 
@@ -207,7 +214,7 @@ CI runs the presets but not the plugin (see step 1).
 
 Bump `ref:` in the dev dependency. Each preset release pins the matching
 plugin release in `plugin.yaml`, so one bump updates both. Read the
-[changelog](../packages/btwld_rules/CHANGELOG.md) for new rules first.
+[changelog](../packages/bitwild_lints/CHANGELOG.md) for new rules first.
 
 ## Troubleshooting
 

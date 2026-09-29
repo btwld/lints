@@ -17,4 +17,4 @@ jobs:
       - run: dart format --output=none --set-exit-if-changed .
       - run: dart analyze --fatal-infos
       - run: dart test
-        working-directory: packages/btwld_rules
+        working-directory: packages/bitwild_lints

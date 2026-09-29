@@ -2,8 +2,8 @@
 // ignore_for_file: non_constant_identifier_names
 
 import 'package:analyzer_testing/analysis_rule/analysis_rule.dart';
-import 'package:btwld_rules/src/fixes/add_blank_line_before_return.dart';
-import 'package:btwld_rules/src/rules/blank_line_before_return.dart';
+import 'package:bitwild_lints/src/fixes/add_blank_line_before_return.dart';
+import 'package:bitwild_lints/src/rules/blank_line_before_return.dart';
 import 'package:test/test.dart';
 import 'package:test_reflective_loader/test_reflective_loader.dart';
 

@@ -1,6 +1,6 @@
 # Adding a rule
 
-Every rule in `btwld_rules` follows the same shape. Copy an existing rule
+Every rule in `bitwild_lints` follows the same shape. Copy an existing rule
 that is close to what you need.
 
 ## 1. Decide what it is
@@ -12,14 +12,16 @@ that is close to what you need.
 - **Warning or lint:** a rule that finds bugs is a warning, registered with
   `registerWarningRule` and on by default. A style or convention rule is a
   lint, registered with `registerLintRule` and enabled in
-  `packages/btwld_lints/lib/plugin.yaml`.
-- **Behavior:** rules can't read options from `analysis_options.yaml` (the
-  plugin API only passes enabled and severity). Build our convention into
-  the rule and document it.
+  `packages/bitwild_analysis/lib/plugin.yaml`.
+- **Options:** the plugin API passes rules only enabled and severity. A rule
+  that needs options reads them with `RuleOptions.forRule` from the
+  `bitwild_lints:` section of `analysis_options.yaml` (see
+  `lib/src/config.dart`), and must behave well with none. Prefer a good
+  built-in default over an option.
 
 ## 2. Write it
 
-- The rule goes in `packages/btwld_rules/lib/src/rules/<name>.dart`: a class
+- The rule goes in `packages/bitwild_lints/lib/src/rules/<name>.dart`: a class
   extending `AnalysisRule` with a `static const LintCode code`, and a
   `SimpleAstVisitor` registered for the narrowest node types that work.
 - A quick fix goes in `lib/src/fixes/<name>.dart`, as a
@@ -47,15 +49,15 @@ Tests go in `test/rules/<name>_test.dart`, using `AnalysisRuleTest` from
 
 ## 4. Check it against this repository
 
-This repository runs its own rules through `analysis_options.yaml` at the
-root (every rule except `sort_class_members`), and CI fails on any
+This repository runs every rule on itself through `analysis_options.yaml` at
+the root, with the member order configured to its style, and CI fails on any
 diagnostic. A new rule that fires on this code base is either finding real
 issues to fix here, or it is wrong.
 
 ## 5. Check it against real code
 
 Before releasing, enable the plugin by `path:` in a throwaway worktree of a
-few large btwld repositories and run `dart analyze`. Add a file with a
+few large Bitwild repositories and run `dart analyze`. Add a file with a
 deliberate violation to each package first, and confirm each one is
 reported. That proves the rule ran there, so an otherwise empty result
 really means no false positives.
@@ -63,13 +65,13 @@ really means no false positives.
 ## 6. Document it
 
 Add the rule to the table in the root `README.md`, add a section with a bad
-and a good example to `packages/btwld_rules/README.md`, and add a changelog
+and a good example to `packages/bitwild_lints/README.md`, and add a changelog
 entry.
 
 ## Releasing
 
 1. Bump `version` in both packages' `pubspec.yaml` and update both
    changelogs.
-2. Update `ref:` in `packages/btwld_lints/lib/plugin.yaml` and in the docs
+2. Update `ref:` in `packages/bitwild_analysis/lib/plugin.yaml` and in the docs
    to the new tag.
 3. Merge, then tag `vX.Y.Z` on `main` and push the tag.

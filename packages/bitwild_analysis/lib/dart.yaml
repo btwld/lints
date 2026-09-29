@@ -1,11 +1,11 @@
-# Analysis options for btwld Dart packages.
+# Analysis options for Bitwild Dart packages.
 #
 # In analysis_options.yaml:
 #
-#   include: package:btwld_lints/dart.yaml
+#   include: package:bitwild_analysis/dart.yaml
 #
 # Builds on package:lints/recommended.yaml with the strict analyzer modes and
-# the extra rules most btwld repositories already enable.
+# the extra rules most Bitwild repositories already enable.
 include: package:lints/recommended.yaml
 
 analyzer:

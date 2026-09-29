@@ -12,18 +12,18 @@ import 'src/rules/sort_named_arguments.dart';
 import 'src/rules/unconditional_recursion.dart';
 
 /// The entry point the Dart analysis server loads.
-final plugin = BtwldRulesPlugin();
+final plugin = BitwildLintsPlugin();
 
-class BtwldRulesPlugin extends Plugin {
+class BitwildLintsPlugin extends Plugin {
   @override
-  String get name => 'btwld_rules';
+  String get name => 'bitwild_lints';
 
   @override
   void register(PluginRegistry registry) {
     // Bugs: on by default.
     registry.registerWarningRule(UnconditionalRecursion());
 
-    // Conventions: enabled through package:btwld_lints/plugin.yaml.
+    // Conventions: enabled through package:bitwild_analysis/plugin.yaml.
     registry
       ..registerLintRule(AvoidBarrelImportsInSrc())
       ..registerLintRule(AvoidDeeplyNestedConditionals())

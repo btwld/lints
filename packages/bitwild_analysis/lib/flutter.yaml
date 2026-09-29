@@ -1,14 +1,14 @@
-# Analysis options for btwld Flutter apps and packages.
+# Analysis options for Bitwild Flutter apps and packages.
 #
 # In analysis_options.yaml:
 #
-#   include: package:btwld_lints/flutter.yaml
+#   include: package:bitwild_analysis/flutter.yaml
 #
 # Adds package:flutter_lints/flutter.yaml and Flutter-specific rules to
-# package:btwld_lints/dart.yaml.
+# package:bitwild_analysis/dart.yaml.
 include:
   - package:flutter_lints/flutter.yaml
-  - package:btwld_lints/dart.yaml
+  - package:bitwild_analysis/dart.yaml
 
 linter:
   rules:

@@ -1,13 +1,25 @@
-# Dogfoods the presets and the plugin on this repository. Every rule except
-# sort_class_members is enforced; CI runs `dart analyze --fatal-infos`.
-include: package:btwld_lints/dart.yaml
+# Dogfoods the presets and the plugin on this repository, with every rule
+# enforced and the member order configured to this code base's style. CI runs
+# `dart analyze --fatal-infos`.
+include: package:bitwild_analysis/dart.yaml
 
 plugins:
-  btwld_rules:
-    path: packages/btwld_rules
+  bitwild_lints:
+    path: packages/bitwild_lints
     diagnostics:
       avoid_barrel_imports_in_src: true
       avoid_deeply_nested_conditionals: true
       blank_line_before_return: true
       prefer_named_boolean_parameters: true
+      sort_class_members: true
       sort_named_arguments: true
+
+bitwild_lints:
+  sort_class_members:
+    order:
+      - static-fields
+      - constructors
+      - fields
+      - getters-setters
+      - methods
+      - static-methods

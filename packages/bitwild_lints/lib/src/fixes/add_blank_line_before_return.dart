@@ -8,13 +8,13 @@ import '../rules/blank_line_before_return.dart';
 
 /// Inserts an empty line above a `return` and its leading comments.
 class AddBlankLineBeforeReturn extends ResolvedCorrectionProducer {
-  AddBlankLineBeforeReturn({required super.context});
-
   static const _kind = FixKind(
-    'btwld.fix.addBlankLineBeforeReturn',
+    'bitwild.fix.addBlankLineBeforeReturn',
     DartFixKindPriority.standard,
     "Add a blank line before 'return'",
   );
+
+  AddBlankLineBeforeReturn({required super.context});
 
   @override
   CorrectionApplicability get applicability =>

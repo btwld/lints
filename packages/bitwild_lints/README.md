@@ -1,29 +1,30 @@
-# btwld_rules
+# bitwild_lints
 
-An analyzer plugin with btwld's custom lint rules and quick fixes.
+An analyzer plugin with Bitwild's custom lint rules and quick fixes.
 
-Enable it through `package:btwld_lints/plugin.yaml`, or directly in
+Enable it through `package:bitwild_analysis/plugin.yaml`, or directly in
 `analysis_options.yaml`:
 
 ```yaml
 plugins:
-  btwld_rules:
+  bitwild_lints:
     git:
       url: https://github.com/btwld/lints.git
-      path: packages/btwld_rules
-      ref: v0.2.0
+      path: packages/bitwild_lints
+      ref: v0.3.0
 ```
 
 The Git source needs Dart 3.13 or later; on Dart 3.10 to 3.12, use
 `path:` with a local checkout of this repository.
 
 `unconditional_recursion` finds bugs, so it is a warning and on by default.
-The other rules are conventions: they are lints. `package:btwld_lints/plugin.yaml`
+The other rules are conventions: they are lints. `package:bitwild_analysis/plugin.yaml`
 enables the recommended ones and `plugin_all.yaml` enables all of them. Each
 can be turned off on its own (see the
-[installation guide](../../doc/installing.md#turning-things-off)). Rules can't
-take options: each one builds in btwld's convention. Suppress a single
-diagnostic with `// ignore: btwld_rules/<rule_name>`.
+[installation guide](../../doc/installing.md#turning-things-off)). Rules that
+take options read them from a top-level `bitwild_lints:` section in
+`analysis_options.yaml`; today that is `sort_class_members`. Suppress a single
+diagnostic with `// ignore: bitwild_lints/<rule_name>`.
 
 | Rule | Kind | Enabled by | Quick fix |
 |---|---|---|---|
@@ -200,7 +201,8 @@ the inner parameters of function-typed parameters.
 ### sort_class_members
 
 Class members follow one predictable order, so readers know where to look and
-parallel edits touch the same places.
+parallel edits touch the same places. The order is configurable; without
+configuration, these defaults apply.
 
 Regular classes:
 
@@ -230,12 +232,7 @@ Widget classes (subclasses of Flutter's `Widget` or `State`):
 8. overridden public methods
 9. the `build` method
 
-A group without a modifier matches every value of it: public fields include
-static ones. A member takes the most specific group it matches. Named methods
-such as `build` are the most specific, and ties go to the earlier group, so a
-private static method counts as a static method.
-
-**Bad**:
+**Bad** (with the default order):
 
 ```dart
 class Cart {
@@ -255,12 +252,60 @@ class Cart {
 }
 ```
 
+#### Configuring the order
+
+Set `order` for regular classes and `widgets-order` for widget classes in a
+top-level `bitwild_lints:` section of `analysis_options.yaml`. Each list
+replaces its default; one you leave out keeps its default.
+
+```yaml
+bitwild_lints:
+  sort_class_members:
+    order:
+      - static-fields
+      - constructors
+      - named-constructors
+      - fields
+      - getters-setters
+      - methods
+      - overridden-methods
+      - to-json-method
+    widgets-order:
+      - constructors
+      - fields
+      - init-state-method
+      - dispose-method
+      - build-method
+```
+
+An entry is either modifiers followed by a group, or a member's name in kebab
+case followed by its kind:
+
+- **Groups:** `fields`, `constructors`, `methods`, `getters`, `setters`, and
+  `getters-setters` (both).
+- **Modifiers:** `public` or `private`; `static`; `overridden` (members marked
+  `@override`); for fields, `const`, `final`, or `var`, and `late`; for
+  constructors, `named` and `factory`. Combine them, as in
+  `overridden-public-getters` or `late-final-fields`.
+- **Named members:** `build-method`, `init-state-method`, `to-json-method`,
+  `hash-code-getter`, `from-json-constructor`, and so on. The kind is
+  singular: `field`, `constructor`, `method`, `getter`, or `setter`.
+
+A group without a modifier matches every value of it: `fields` includes
+static and private fields. A member takes the most specific entry it matches.
+Named entries are the most specific, then entries with more modifiers, and
+ties go to the earlier entry. So with both `static-methods` and
+`private-methods`, a private static method counts as a static method.
+Members that match no entry can go anywhere, and unrecognized entries are
+ignored.
+
+The section follows `include:`, so a workspace can configure the order once in
+its root options file, and a project's own file overrides what it includes.
+Restart the analysis server after changing it.
+
 The rule checks `class` declarations only, not mixins, enums, extensions, or
-extension types. Members that match no group, such as getters, setters, and
-plain public methods in widget classes, can go anywhere. Overrides are
-recognized by their `@override` annotation. There is no quick fix: moving a
-member safely means carrying its comments, annotations, and surrounding blank
-lines along with it.
+extension types. There is no quick fix: moving a member safely means carrying
+its comments, annotations, and surrounding blank lines along with it.
 
 ### sort_named_arguments
 
