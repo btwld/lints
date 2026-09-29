@@ -13,7 +13,17 @@ with code generators such as `build_runner`, `freezed`, or `json_serializable`.
 
 ## Quick start
 
-Requires Dart 3.11 or later (Flutter 3.41 or later).
+The presets require Dart 3.11 or later (Flutter 3.41 or later). The plugin
+needs a Dart version whose analysis server supports its source:
+
+| Plugin source | Dart | Flutter |
+|---|---|---|
+| Git (`plugin.yaml`) | 3.13 or later | 3.47 or later |
+| Local `path:` | 3.10 or later | 3.38 or later |
+
+Dart 3.12 (Flutter 3.44) ignores Git plugin sources without an error. On
+those versions, point the plugin at a local checkout with `path:` until the
+package is published to pub.dev.
 
 Add the presets as a dev dependency. Until the packages are published to
 pub.dev, use the tagged Git release:

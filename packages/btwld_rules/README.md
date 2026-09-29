@@ -14,6 +14,9 @@ plugins:
       ref: v0.1.0
 ```
 
+The Git source needs Dart 3.13 or later; on Dart 3.10 to 3.12, use
+`path:` with a local checkout of this repository.
+
 Rules registered as warnings are on by default. Suppress a diagnostic with
 `// ignore: btwld_rules/<rule_name>`.
 

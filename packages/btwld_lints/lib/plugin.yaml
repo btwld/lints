@@ -6,6 +6,9 @@
 #     - package:btwld_lints/flutter.yaml
 #     - package:btwld_lints/plugin.yaml
 #
+# Git plugin sources need Dart 3.13 or later (Flutter 3.47 or later). Earlier
+# analysis servers ignore this block without reporting an error.
+#
 # In a pub workspace, include it in each member package's
 # analysis_options.yaml: the analyzer reads plugins from the options file of
 # the package it treats as the analysis root.
