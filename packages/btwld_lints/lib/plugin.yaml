@@ -1,0 +1,17 @@
+# Enables the btwld_rules analyzer plugin (custom rules and quick fixes).
+#
+# Include it next to a preset:
+#
+#   include:
+#     - package:btwld_lints/flutter.yaml
+#     - package:btwld_lints/plugin.yaml
+#
+# In a pub workspace, include it in each member package's
+# analysis_options.yaml: the analyzer reads plugins from the options file of
+# the package it treats as the analysis root.
+plugins:
+  btwld_rules:
+    git:
+      url: https://github.com/btwld/lints.git
+      path: packages/btwld_rules
+      ref: v0.1.0

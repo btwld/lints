@@ -1,0 +1,19 @@
+name: btwld_rules
+description: Analyzer plugin with btwld's custom lint rules and quick fixes for Dart and Flutter code.
+version: 0.1.0
+repository: https://github.com/btwld/lints/tree/main/packages/btwld_rules
+issue_tracker: https://github.com/btwld/lints/issues
+resolution: workspace
+
+environment:
+  sdk: ^3.11.0
+
+dependencies:
+  analysis_server_plugin: ^0.3.23
+  analyzer: ^14.4.0
+
+dev_dependencies:
+  analyzer_testing: ^0.4.2
+  btwld_lints: ^0.1.0
+  test: ^1.32.0
+  test_reflective_loader: ^0.4.0

@@ -1,0 +1,9 @@
+name: btwld_lints_workspace
+publish_to: none
+
+environment:
+  sdk: ^3.11.0
+
+workspace:
+  - packages/btwld_lints
+  - packages/btwld_rules

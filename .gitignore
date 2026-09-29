@@ -1,0 +1,9 @@
+.dart_tool/
+.packages
+build/
+pubspec.lock
+.fvm/flutter_sdk
+.idea/
+.vscode/
+*.iml
+.DS_Store
