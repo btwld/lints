@@ -74,6 +74,7 @@ class _Visitor extends SimpleAstVisitor<void> {
     for (final call in finder.calls) {
       if (_isUnconditional(call, body)) {
         rule.reportAtNode(call.methodName, arguments: [element.displayName]);
+
         return;
       }
     }
@@ -103,6 +104,7 @@ class _SelfCallFinder extends RecursiveAstVisitor<void> {
 
   static bool _isSameReceiver(MethodInvocation node) {
     if (node.isCascaded || node.isNullAware) return false;
+
     return switch (node.target) {
       null || ThisExpression() => true,
       // Static members, extension members, and import-prefixed functions.
@@ -123,6 +125,7 @@ bool _isUnconditional(AstNode call, FunctionBody body) {
     if (!_alwaysEvaluates(parent, child)) return false;
     child = parent;
   }
+
   return false;
 }
 
@@ -181,6 +184,7 @@ bool _shortCircuits(TokenType type) =>
 bool _mayExit(Statement statement) {
   final finder = _ExitFinder();
   statement.accept(finder);
+
   return finder.found;
 }
 
@@ -213,6 +217,7 @@ class _ExitFinder extends RecursiveAstVisitor<void> {
     // A call typed `Never`, such as `exit` or `fail`, does not return.
     if (node.staticType?.isBottom ?? false) {
       found = true;
+
       return;
     }
     super.visitMethodInvocation(node);

@@ -1,13 +1,12 @@
-# Enables the btwld_rules analyzer plugin with its recommended rules: the bug
-# checks plus the conventions that rarely fire on existing code. For every
-# rule, including the ordering and formatting conventions, include
-# plugin_all.yaml instead.
+# Enables the btwld_rules analyzer plugin with every rule: plugin.yaml's
+# recommended rules plus the ordering and formatting conventions, which
+# report many issues on code that doesn't follow them yet.
 #
 # Include it next to a preset:
 #
 #   include:
 #     - package:btwld_lints/flutter.yaml
-#     - package:btwld_lints/plugin.yaml
+#     - package:btwld_lints/plugin_all.yaml
 #
 # Git plugin sources need Dart 3.13 or later (Flutter 3.47 or later). Earlier
 # analysis servers ignore this block without reporting an error.
@@ -25,4 +24,7 @@ plugins:
     diagnostics:
       avoid_barrel_imports_in_src: true
       avoid_deeply_nested_conditionals: true
+      blank_line_before_return: true
       prefer_named_boolean_parameters: true
+      sort_class_members: true
+      sort_named_arguments: true
