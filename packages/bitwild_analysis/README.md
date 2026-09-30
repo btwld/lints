@@ -13,6 +13,7 @@ include:
 | `dart.yaml` | `package:lints/recommended.yaml`, strict analyzer modes, and Bitwild's shared rules. |
 | `flutter.yaml` | `dart.yaml` plus `package:flutter_lints/flutter.yaml` and `prefer_const_constructors`. |
 | `plugin.yaml` | The [`bitwild_lints`](../bitwild_lints) analyzer plugin at the matching release, with its recommended rules. |
+| `mix.yaml` | The `mix_lint` plugin, for projects that use [Mix](https://github.com/btwld/mix). Include it next to `plugin.yaml` or `plugin_all.yaml`. |
 | `plugin_all.yaml` | The same plugin with every rule, including the ordering and formatting conventions. Use instead of `plugin.yaml`. |
 
 The rule selection comes from the rules most active Bitwild repositories already

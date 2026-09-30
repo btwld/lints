@@ -1,0 +1,22 @@
+# Enables the mix_lint analyzer plugin for projects that use Mix.
+#
+# Include it next to a preset and plugin.yaml:
+#
+#   include:
+#     - package:bitwild_analysis/flutter.yaml
+#     - package:bitwild_analysis/plugin.yaml
+#     - package:bitwild_analysis/mix.yaml
+#
+# mix_lint's bug checks are warnings, so they are on by default. Its style
+# rules are lints: turn them on under the plugin's `diagnostics` in your own
+# analysis_options.yaml, as described in mix_lint's README.
+#
+# mix_lint comes from the Mix repository's main branch until a release that
+# loads alongside bitwild_lints is on pub.dev. Git plugin sources need Dart
+# 3.13 or later (Flutter 3.47 or later).
+plugins:
+  mix_lint:
+    git:
+      url: https://github.com/btwld/mix.git
+      path: packages/mix_lint
+      ref: main
