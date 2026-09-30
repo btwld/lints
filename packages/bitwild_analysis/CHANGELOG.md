@@ -1,3 +1,7 @@
+## Unreleased
+
+- Add `mix.yaml`, which enables the `mix_lint` plugin from the Mix repository.
+
 ## 0.3.0
 
 - Rename the package from `btwld_lints` to `bitwild_analysis`. Update the

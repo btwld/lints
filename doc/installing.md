@@ -66,6 +66,9 @@ yet they report hundreds to thousands of issues, so start with `plugin.yaml`
 and switch once the code is ready (see step 6). Include one or the other, not
 both.
 
+Projects that use Mix can add `package:bitwild_analysis/mix.yaml` to the list
+to enable Mix's `mix_lint` plugin as well. Both plugins run together.
+
 On Dart 3.11 or 3.12, drop the `plugin.yaml` line and, if you want the plugin
 locally, add it by path to a checkout of this repository:
 

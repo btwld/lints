@@ -61,6 +61,8 @@ workspaces, SDK requirements, overrides, and CI, follow the
   with its recommended rules.
 - `plugin_all.yaml`: the same plugin with every rule, including the ordering
   and formatting conventions.
+- `mix.yaml`: adds Mix's own `mix_lint` plugin, for projects that use Mix.
+  Include it next to `plugin.yaml` or `plugin_all.yaml`.
 
 ## Rules
 
