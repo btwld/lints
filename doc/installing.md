@@ -214,6 +214,12 @@ plugins:
 The same `diagnostics` map changes a rule's severity instead: set it to
 `info`, `warning`, or `error`.
 
+This block replaces the one in `plugin.yaml` or `plugin_all.yaml`, not merges
+with it. Every opt-in rule that the preset turned on is off again unless the
+block lists it, so copy the preset's `diagnostics` entries and change only the
+rule you mean to change. Warning rules stay on, because they are on by
+default.
+
 ## Configuring rules
 
 Rules with options read them from a top-level `bitwild_lints:` section of
