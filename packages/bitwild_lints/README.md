@@ -11,7 +11,7 @@ plugins:
     git:
       url: https://github.com/btwld/lints.git
       path: packages/bitwild_lints
-      ref: v0.3.0
+      ref: v0.4.0
 ```
 
 The Git source needs Dart 3.13 or later; on Dart 3.10 to 3.12, use

@@ -1,6 +1,6 @@
 name: bitwild_analysis
 description: Shared analysis options for Bitwild Dart and Flutter projects.
-version: 0.3.0
+version: 0.4.0
 repository: https://github.com/btwld/lints/tree/main/packages/bitwild_analysis
 issue_tracker: https://github.com/btwld/lints/issues
 resolution: workspace

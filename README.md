@@ -21,6 +21,9 @@ needs a Dart version whose analysis server supports its source:
 | Git (`plugin.yaml`) | 3.13 or later | 3.47 or later |
 | Local `path:` | 3.10 or later | 3.38 or later |
 
+CI checks both packages on Dart 3.12 and on the current stable release
+(Dart 3.14, Flutter 3.50).
+
 Dart 3.12 (Flutter 3.44) ignores Git plugin sources without an error. On
 those versions, point the plugin at a local checkout with `path:` until the
 package is published to pub.dev.
@@ -34,7 +37,7 @@ dev_dependencies:
     git:
       url: https://github.com/btwld/lints.git
       path: packages/bitwild_analysis
-      ref: v0.3.0
+      ref: v0.4.0
 ```
 
 Then, in `analysis_options.yaml`:

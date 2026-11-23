@@ -13,3 +13,5 @@ include:
 linter:
   rules:
     - prefer_const_constructors
+    - use_colored_box
+    - use_decorated_box

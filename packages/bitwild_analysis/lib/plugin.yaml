@@ -20,7 +20,7 @@ plugins:
     git:
       url: https://github.com/btwld/lints.git
       path: packages/bitwild_lints
-      ref: v0.3.0
+      ref: v0.4.0
     # Warning rules are on by default; these lint rules are opt-in.
     diagnostics:
       avoid_barrel_imports_in_src: true

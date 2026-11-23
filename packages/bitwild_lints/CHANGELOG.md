@@ -1,3 +1,9 @@
+## 0.4.0
+
+- No rule changes. Released with `bitwild_analysis` 0.4.0 so `plugin.yaml`
+  keeps pinning the matching plugin release.
+- Verified on Dart 3.14 (Flutter 3.50).
+
 ## 0.3.0
 
 - Rename the package from `btwld_rules` to `bitwild_lints`. Update `plugins:`
