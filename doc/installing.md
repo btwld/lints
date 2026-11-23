@@ -187,6 +187,11 @@ Changing a public API parameter from positional to named, as
 `prefer_named_boolean_parameters` asks, breaks callers. In a published
 package, do it in a major release or suppress the diagnostic with a comment.
 
+Run `dart analyze` over the packages one at a time, for example with
+`melos exec -c 1`. Parallel analysis servers build the plugin snapshot in the
+shared `~/.dartServer` cache at the same time, and one of them can fail with
+"does not contain a valid AOT snapshot".
+
 ## Turning things off
 
 A preset rule, in `analysis_options.yaml`:
