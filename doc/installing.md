@@ -121,24 +121,6 @@ rules the presets don't choose for you, such as `public_member_api_docs`.
 If the project configured equivalent checks in another analysis tool, remove
 that configuration so the same issue isn't reported twice.
 
-### Replacing DCM
-
-Several Bitwild repositories used DCM (`dart_code_metrics`) for conventions
-that `bitwild_lints` now covers. Map the DCM rules you used, then remove the
-`dart_code_metrics:` or `dcm:` block, the `dart_code_metrics_presets`
-dependency, and any `dcm` steps in scripts and CI.
-
-| DCM rule | `bitwild_lints` rule | In `plugin.yaml` |
-|---|---|---|
-| `newline-before-return` | `blank_line_before_return` | No |
-| `member-ordering` | `sort_class_members` (configure the order) | No |
-| `arguments-ordering` | `sort_named_arguments` | No |
-| `avoid-importing-entrypoint-exports` (`only-in-src`) | `avoid_barrel_imports_in_src` | Yes |
-| `avoid-nested-conditional-expressions` (`acceptable-level: 3`) | `avoid_deeply_nested_conditionals` | Yes |
-
-Nothing replaces DCM's metrics, `check-unused-code`, or `check-unused-files`.
-The analyzer still reports unused private declarations and unused imports.
-
 ## 5. Restart and analyze
 
 Restart the analysis server so it loads the plugin. In VS Code, run
