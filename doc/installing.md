@@ -31,7 +31,7 @@ dev_dependencies:
     git:
       url: https://github.com/btwld/lints.git
       path: packages/bitwild_analysis
-      ref: v0.3.0
+      ref: v0.4.0
 ```
 
 The presets depend only on `lints` and `flutter_lints`, so they don't
@@ -153,6 +153,14 @@ dart analyze > before.txt   # with the old options
 dart analyze > after.txt    # with the presets
 ```
 
+Fix the mechanical diagnostics one rule at a time, with
+`dart fix --apply --code=directives_ordering` and so on. A bare
+`dart fix --apply` also applies the SDK's API migrations (on Flutter 3.50,
+for example, it moves `package:flutter/material.dart` imports to
+`material_ui`), which don't belong in a lint change. If the repository isn't
+`dart format`-clean, don't format whole files either; the diff then hides
+the lint fixes.
+
 Land the configuration change on its own, with any rules that produce too
 many diagnostics turned off, then turn them back on in follow-up changes as
 the code is fixed. That keeps each review small.
@@ -160,6 +168,11 @@ the code is fixed. That keeps each review small.
 Changing a public API parameter from positional to named, as
 `prefer_named_boolean_parameters` asks, breaks callers. In a published
 package, do it in a major release or suppress the diagnostic with a comment.
+
+Run `dart analyze` over the packages one at a time, for example with
+`melos exec -c 1`. Parallel analysis servers build the plugin snapshot in the
+shared `~/.dartServer` cache at the same time, and one of them can fail with
+"does not contain a valid AOT snapshot".
 
 ## Turning things off
 
@@ -180,13 +193,19 @@ plugins:
     git:
       url: https://github.com/btwld/lints.git
       path: packages/bitwild_lints
-      ref: v0.3.0
+      ref: v0.4.0
     diagnostics:
       sort_class_members: false
 ```
 
 The same `diagnostics` map changes a rule's severity instead: set it to
 `info`, `warning`, or `error`.
+
+This block replaces the one in `plugin.yaml` or `plugin_all.yaml`, not merges
+with it. Every opt-in rule that the preset turned on is off again unless the
+block lists it, so copy the preset's `diagnostics` entries and change only the
+rule you mean to change. Warning rules stay on, because they are on by
+default.
 
 ## Configuring rules
 
